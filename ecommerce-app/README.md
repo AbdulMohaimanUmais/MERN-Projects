@@ -2,11 +2,14 @@
 
 Full-stack e-commerce platform with authentication, cart, wishlist, Stripe payments, and an admin dashboard with sales analytics.
 
+🔗 **Live Demo:** https://ecommerce.umais.online
+
 ## Tech Stack
 - **Frontend:** React (Vite), Tailwind CSS, React Router
 - **Backend:** Node.js, Express, MongoDB (Mongoose)
 - **Auth:** JWT, bcrypt
 - **Payments:** Stripe Checkout
+- **Deployment:** VPS (Nginx + SSL) for backend, Vercel for frontend
 
 ## Features
 - User signup/login with JWT auth
@@ -39,11 +42,10 @@ npm run dev
 ![Home](screenshots/home.png)
 
 ### Orders
-![Admin](screenshots/orders.png)
+![Orders](screenshots/orders.png)
 
 ### Cart
 ![Cart](screenshots/cart.png)
 
 ### Admin Dashboard
 ![Admin](screenshots/admin.png)
-
