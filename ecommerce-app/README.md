@@ -32,6 +32,3 @@ cd client
 npm install
 npm run dev
 \`\`\`
-
-## Screenshots
-(add screenshots here)
