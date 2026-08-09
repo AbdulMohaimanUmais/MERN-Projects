@@ -32,3 +32,14 @@ cd client
 npm install
 npm run dev
 \`\`\`
+
+## Screenshots
+
+### Home
+![Home](screenshots/home.png)
+
+### Cart
+![Cart](screenshots/cart.png)
+
+### Admin Dashboard
+![Admin](screenshots/admin.png)
