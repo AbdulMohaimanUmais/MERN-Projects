@@ -38,9 +38,12 @@ npm run dev
 ### Home
 ![Home](screenshots/home.png)
 
-### Admin Dashboard
+### Orders
 ![Admin](screenshots/orders.png)
 
 ### Cart
 ![Cart](screenshots/cart.png)
+
+### Admin Dashboard
+![Admin](screenshots/admin.png)
 
