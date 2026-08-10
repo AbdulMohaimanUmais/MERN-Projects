@@ -3,6 +3,7 @@ import api from '../api/axios';
 
 export default function Cart() {
   const [cart, setCart] = useState(null);
+  const [removingId, setRemovingId] = useState(null);
 
   const fetchCart = async () => {
     const { data } = await api.get('/cart');
@@ -14,13 +15,23 @@ export default function Cart() {
   }, []);
 
   const removeItem = async (productId) => {
-    await api.delete(`/cart/${productId}`);
-    fetchCart();
-  };
+    setRemovingId(productId);
 
-  const checkout = async () => {
-    const { data } = await api.post('/orders/checkout');
-    window.location.href = data.url;
+    try {
+      await api.delete(`/cart/${productId}`);
+
+      // UI se immediately remove
+      setCart((prev) => ({
+        ...prev,
+        items: prev.items.filter(
+          (item) => item.product._id !== productId
+        ),
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setRemovingId(null);
+    }
   };
 
   if (!cart) {
@@ -38,11 +49,11 @@ export default function Cart() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
           Your Cart
         </h1>
+
         <p className="mt-2 text-gray-500">
           Review your items before checkout.
         </p>
@@ -64,44 +75,61 @@ export default function Cart() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
-            {cart.items.map((item) => (
-              <div
-                key={item.product._id}
-                className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-lg font-semibold text-gray-900 truncate">
-                      {item.product.name}
-                    </h2>
+            {cart.items.map((item) => {
+              const isRemoving = removingId === item.product._id;
 
-                    <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-gray-500">
-                      <span>
-                        Qty: <span className="font-medium">{item.quantity}</span>
-                      </span>
+              return (
+                <div
+                  key={item.product._id}
+                  className={`bg-white border border-gray-200 rounded-2xl p-5 shadow-sm transition-all ${
+                    isRemoving
+                      ? 'opacity-50 scale-[0.99]'
+                      : 'hover:shadow-md'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-lg font-semibold text-gray-900 truncate">
+                        {item.product.name}
+                      </h2>
 
-                      <span>×</span>
+                      <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-gray-500">
+                        <span>
+                          Qty:{' '}
+                          <span className="font-medium">
+                            {item.quantity}
+                          </span>
+                        </span>
 
-                      <span className="font-medium text-gray-700">
-                        ${item.product.price.toFixed(2)}
-                      </span>
+                        <span>×</span>
+
+                        <span className="font-medium text-gray-700">
+                          ${Number(item.product.price).toFixed(2)}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <button
-                    onClick={() => removeItem(item.product._id)}
-                    className="shrink-0 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors"
-                  >
-                    Remove
-                  </button>
+                    <button
+                      onClick={() => removeItem(item.product._id)}
+                      disabled={isRemoving}
+                      className="shrink-0 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isRemoving ? (
+                        <span className="flex items-center gap-2">
+                          <span className="w-3.5 h-3.5 border-2 border-red-300 border-t-red-600 rounded-full animate-spin" />
+                          Removing...
+                        </span>
+                      ) : (
+                        'Remove'
+                      )}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm lg:sticky lg:top-6">
               <h2 className="text-xl font-semibold text-gray-900">
@@ -119,13 +147,17 @@ export default function Cart() {
                 <span className="text-lg font-semibold text-gray-900">
                   Total
                 </span>
+
                 <span className="text-xl font-bold text-gray-900">
                   ${total.toFixed(2)}
                 </span>
               </div>
 
               <button
-                onClick={checkout}
+                onClick={async () => {
+                  const { data } = await api.post('/orders/checkout');
+                  window.location.href = data.url;
+                }}
                 className="w-full mt-6 bg-black text-white py-3.5 px-4 rounded-xl font-semibold hover:bg-gray-800 active:scale-[0.98] transition-all"
               >
                 Checkout
