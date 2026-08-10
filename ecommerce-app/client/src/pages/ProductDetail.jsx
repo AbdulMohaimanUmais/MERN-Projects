@@ -17,6 +17,7 @@ export default function ProductDetail() {
         productId: id,
         quantity: 1,
       });
+
       setMsg('Added to cart');
     } catch (err) {
       setMsg(err.response?.data?.message || 'Error');
@@ -28,11 +29,15 @@ export default function ProductDetail() {
       await api.post('/wishlist', {
         productId: id,
       });
+
       setMsg('Added to wishlist');
     } catch (err) {
       setMsg(err.response?.data?.message || 'Error');
     }
   };
+
+  const getImage = (id) =>
+    `https://picsum.photos/seed/product-${id}/800/700`;
 
   if (!product) {
     return (
@@ -45,18 +50,22 @@ export default function ProductDetail() {
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2">
 
             {/* Product Image */}
-            <div className="min-h-[300px] sm:min-h-[400px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-              <span className="text-7xl sm:text-8xl opacity-70">
-                🛍️
-              </span>
+            <div className="h-[350px] sm:h-[450px] md:h-full min-h-[450px] bg-slate-100 overflow-hidden">
+              <img
+                src={getImage(product._id)}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Product Details */}
             <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                 {product.category}
               </span>
@@ -92,8 +101,9 @@ export default function ProductDetail() {
                 </span>
               </div>
 
-              {/* Actions */}
+              {/* Buttons */}
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
+
                 <button
                   onClick={addToCart}
                   disabled={product.stock <= 0}
@@ -108,6 +118,7 @@ export default function ProductDetail() {
                 >
                   ♡ Add to Wishlist
                 </button>
+
               </div>
 
               {/* Message */}
@@ -118,9 +129,11 @@ export default function ProductDetail() {
                   </p>
                 </div>
               )}
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

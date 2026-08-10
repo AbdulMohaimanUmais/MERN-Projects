@@ -17,6 +17,9 @@ export default function Products() {
     fetchProducts();
   }, [search]);
 
+  const getImage = (id) =>
+    `https://picsum.photos/seed/product-${id}/600/500`;
+
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -51,18 +54,20 @@ export default function Products() {
 
         {/* Products */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {products.map((p) => (
               <Link
                 key={p._id}
                 to={`/products/${p._id}`}
                 className="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
               >
-                {/* Product Image Placeholder */}
-                <div className="h-44 sm:h-48 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                  <span className="text-4xl sm:text-5xl opacity-70 group-hover:scale-110 transition-transform duration-200">
-                    🛍️
-                  </span>
+                {/* Product Image */}
+                <div className="h-52 bg-slate-100 overflow-hidden">
+                  <img
+                    src={getImage(p._id)}
+                    alt={p.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
                 {/* Product Info */}
