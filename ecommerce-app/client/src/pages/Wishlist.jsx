@@ -9,27 +9,78 @@ export default function Wishlist() {
     setWishlist(data);
   };
 
-  useEffect(() => { fetchWishlist(); }, []);
+  useEffect(() => {
+    fetchWishlist();
+  }, []);
 
   const remove = async (productId) => {
     await api.delete(`/wishlist/${productId}`);
     fetchWishlist();
   };
 
-  if (!wishlist) return <p className="p-6 text-slate-500">Loading...</p>;
+  if (!wishlist) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <p className="text-gray-600 text-lg">Loading...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">Wishlist</h2>
-      {wishlist.products.length === 0 && <p className="text-slate-500">No items yet.</p>}
-      <div className="space-y-3">
-        {wishlist.products.map((p) => (
-          <div key={p._id} className="flex justify-between items-center bg-white border border-slate-200 rounded-lg p-4">
-            <p className="font-medium text-slate-800">{p.name} — <span className="text-blue-600">${p.price}</span></p>
-            <button onClick={() => remove(p._id)} className="text-red-600 hover:text-red-700 text-sm">Remove</button>
-          </div>
-        ))}
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+          Wishlist
+        </h1>
+        <p className="mt-2 text-gray-500">
+          Products you've saved for later.
+        </p>
       </div>
+
+      {wishlist.products.length === 0 ? (
+        <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center shadow-sm">
+          <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-gray-100 flex items-center justify-center">
+            <span className="text-2xl">♡</span>
+          </div>
+
+          <h2 className="text-xl font-semibold text-gray-900">
+            No items yet
+          </h2>
+
+          <p className="mt-2 text-gray-500">
+            Products you save will appear here.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {wishlist.products.map((p) => (
+            <div
+              key={p._id}
+              className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex-1">
+                  <h2 className="text-lg font-semibold text-gray-900 line-clamp-2">
+                    {p.name}
+                  </h2>
+
+                  <p className="mt-3 text-xl font-bold text-gray-900">
+                    ${p.price.toFixed(2)}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => remove(p._id)}
+                  className="w-full mt-5 py-2.5 px-4 rounded-xl border border-red-200 text-red-600 font-medium hover:bg-red-50 hover:text-red-700 transition-colors"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
