@@ -111,12 +111,7 @@ export default function Signup() {
         {/* Login */}
         <p className="text-sm text-slate-500 text-center mt-6">
           Already have an account?{' '}
-          <Link
-            to="/login"
-            className="text-blue-600 font-medium hover:text-blue-700 hover:underline transition"
-          >
-            Login
-          </Link>
+          
         </p>
       </div>
     </div>
