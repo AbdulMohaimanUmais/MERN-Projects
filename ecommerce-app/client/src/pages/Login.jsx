@@ -96,15 +96,7 @@ export default function Login() {
         </form>
 
         {/* Signup */}
-        <p className="text-sm text-slate-500 text-center mt-6">
-          Don't have an account?{' '}
-          <Link
-            to="/signup"
-            className="text-blue-600 font-medium hover:text-blue-700 hover:underline transition"
-          >
-            Signup
-          </Link>
-        </p>
+     
       </div>
     </div>
   );
