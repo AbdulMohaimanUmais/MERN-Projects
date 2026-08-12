@@ -4,6 +4,8 @@ A full-stack project management tool inspired by Jira, built to demonstrate real
 
 ---
 
+🔗 **Live Demo:** https://jira.umais.online
+
 ## Features
 
 - **Authentication** — JWT-based register/login, protected routes
@@ -95,3 +97,18 @@ _Add screenshots here: Login page, Dashboard, Kanban board, Task modal with comm
 - Complex, interdependent state across multiple entities (projects → tasks → comments/activity/notifications)
 - Clean REST API design with proper auth middleware
 - Team collaboration UX patterns (drag & drop boards, assignment, live notifications)
+
+
+## Screenshots
+
+### Login
+![Login](./screenshots/login.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Kanban Board
+![Board](./screenshots/board.png)
+
+### Task Detail
+![Task Modal](./screenshots/task-modal.png)
