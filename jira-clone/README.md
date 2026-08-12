@@ -102,13 +102,13 @@ _Add screenshots here: Login page, Dashboard, Kanban board, Task modal with comm
 ## Screenshots
 
 ### Login
-![Login](./screenshots/login.png)
+![Login](./Screenshots/login.png)
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./Screenshots/dashboard.png)
 
 ### Kanban Board
-![Board](./screenshots/board.png)
+![Board](./Screenshots/board.png)
 
 ### Task Detail
-![Task Modal](./screenshots/task-modal.png)
+![Task Modal](./Screenshots/task-modal.png)
