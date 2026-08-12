@@ -32,6 +32,7 @@ exports.getTasksByProject = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   try {
+    const oldTask = await Task.findById(req.params.id);
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .populate('assignee', 'name email');
     if (!task) return res.status(404).json({ message: 'Task not found' });
@@ -39,6 +40,10 @@ exports.updateTask = async (req, res) => {
     io.emit('task:updated', task);
 
     await logActivity(io, { project: task.project, user: req.user.id, action: `updated task "${task.title}" to ${task.status}` });
+
+    if (req.body.assignee && (!oldTask.assignee || oldTask.assignee.toString() !== req.body.assignee)) {
+      await notifyUser(io, { user: req.body.assignee, message: `You were assigned to "${task.title}"` });
+    }
 
     res.json(task);
   } catch (err) {
