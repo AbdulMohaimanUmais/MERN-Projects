@@ -22,25 +22,45 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow w-80">
-        <h2 className="text-xl font-bold mb-4">Login</h2>
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-        <input
-          type="email" placeholder="Email" required
-          className="w-full border p-2 mb-3 rounded"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          type="password" placeholder="Password" required
-          className="w-full border p-2 mb-3 rounded"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button className="w-full bg-blue-600 text-white p-2 rounded">Login</button>
-        <p className="text-sm mt-3">No account? <Link to="/register" className="text-blue-600">Register</Link></p>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <h1 className="text-lg font-semibold text-slate-900 tracking-tight">Jira Clone</h1>
+          <p className="text-sm text-slate-500 mt-1">Sign in to your workspace</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="bg-white border border-slate-200 rounded-lg p-6">
+          {error && (
+            <p className="text-red-600 text-sm mb-4 bg-red-50 border border-red-100 rounded-md px-3 py-2">
+              {error}
+            </p>
+          )}
+
+          <label className="text-xs font-medium text-slate-600 mb-1.5 block">Email</label>
+          <input
+            type="email" placeholder="you@example.com" required
+            className="w-full border border-slate-200 rounded-md px-3 py-2 text-sm mb-4 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-shadow"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+
+          <label className="text-xs font-medium text-slate-600 mb-1.5 block">Password</label>
+          <input
+            type="password" placeholder="••••••••" required
+            className="w-full border border-slate-200 rounded-md px-3 py-2 text-sm mb-5 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-shadow"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+
+          <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2.5 rounded-md transition-colors">
+            Sign in
+          </button>
+
+          <p className="text-sm text-slate-500 mt-5 text-center">
+            No account? <Link to="/register" className="text-indigo-600 font-medium hover:underline">Register</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
