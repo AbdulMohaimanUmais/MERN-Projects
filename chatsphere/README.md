@@ -147,15 +147,17 @@ All routes except register/login require a `Bearer` JWT token.
 
 ## 📸 Screenshots
 
-*(Add screenshots of the login page, chat interface, and dark mode here)*
+### Login
+![Login Screen](./screenshots/login.png)
 
----
+### Chat Interface
+![Chat Interface](./screenshots/chat.png)
 
-## 👤 Author
+### Group Chat
+![Group Chat](./screenshots/group.png)
 
-**Umais**
-Freelance Full-Stack Developer
-[Fiverr](#) · [LinkedIn](#) · [Portfolio](#)
+### Dark Mode
+![Dark Mode](./screenshots/dark-mode.png)
 
 ---
 
