@@ -2,7 +2,7 @@
 
 A full-stack, real-time chat application built with the MERN stack and Socket.io — supporting one-to-one messaging, group chats, file sharing, and a complete set of modern messaging features.
 
-**Live Demo:** [chat-app-steel-mu-70.vercel.app](https://chat-app-steel-mu-70.vercel.app)
+**Live Demo:** [chat.umais.online](https://chat.umais.online/)
 **Backend API:** [umais-chat-app.bonto.run](https://umais-chat-app.bonto.run)
 
 ---
