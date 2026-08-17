@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://chatapp1-hpaik4df.b4a.run/api',
 });
 
 API.interceptors.request.use((req) => {
