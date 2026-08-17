@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 import { io } from 'socket.io-client';
 
-const socket = io('https://chatapp1-hpaik4df.b4a.run');
+const socket = io('https://umais-chat-app.bonto.run');
 
 export default function Chat() {
   const { user, logout } = useAuth();

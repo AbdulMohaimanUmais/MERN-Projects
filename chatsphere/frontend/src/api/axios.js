@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://chatapp1-hpaik4df.b4a.run/api',
+  baseURL: 'https://umais-chat-app.bonto.run/api',
 });
 
 API.interceptors.request.use((req) => {
