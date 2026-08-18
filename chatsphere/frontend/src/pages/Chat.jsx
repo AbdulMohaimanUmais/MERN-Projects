@@ -577,38 +577,54 @@ const handleAvatarUpload = async (e) => {
       )}
 
       {showGroupModal && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-    <div className="bg-white rounded-lg p-4 w-80 max-h-[28rem] overflow-y-auto">
-      <div className="flex justify-between mb-4">
-        <h3 className="font-bold">New Group</h3>
-        <button onClick={() => { setShowGroupModal(false); setGroupName(''); setSelectedUsers([]); }}>✕</button>
-      </div>
-      <input
-        value={groupName}
-        onChange={(e) => setGroupName(e.target.value)}
-        placeholder="Group name"
-        className="w-full border p-2 rounded mb-3"
-      />
-      <p className="text-xs text-gray-500 mb-2">Select at least 2 members</p>
-      {allUsers.map((u) => (
-        <label key={u._id} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer">
-          <input
-            type="checkbox"
-            checked={selectedUsers.includes(u._id)}
-            onChange={() => toggleUserSelect(u._id)}
-          />
-          {u.username}
-        </label>
-      ))}
+<div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+  <div className="bg-white rounded-lg p-4 w-80 max-h-[28rem] overflow-y-auto shadow-lg">
+    <div className="flex justify-between mb-4">
+      <h3 className="font-bold">New Group</h3>
       <button
-        onClick={createGroup}
-        disabled={!groupName.trim() || selectedUsers.length < 2}
-        className="w-full bg-green-600 text-white p-2 rounded mt-3 disabled:bg-gray-300"
+        onClick={() => {
+          setShowGroupModal(false);
+          setGroupName('');
+          setSelectedUsers([]);
+        }}
+        className="hover:text-red-500 transition"
       >
-        Create Group
+        ✕
       </button>
     </div>
+
+    <input
+      value={groupName}
+      onChange={(e) => setGroupName(e.target.value)}
+      placeholder="Group name"
+      className="w-full border p-2 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-green-400"
+    />
+
+    <p className="text-xs text-gray-500 mb-2">Select at least 2 members</p>
+
+    {allUsers.map((u) => (
+      <label
+        key={u._id}
+        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer transition"
+      >
+        <input
+          type="checkbox"
+          checked={selectedUsers.includes(u._id)}
+          onChange={() => toggleUserSelect(u._id)}
+        />
+        {u.username}
+      </label>
+    ))}
+
+    <button
+      onClick={createGroup}
+      disabled={!groupName.trim() || selectedUsers.length < 2}
+      className="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded mt-3 disabled:bg-gray-300 transition"
+    >
+      Create Group
+    </button>
   </div>
+</div>
 )}
 
 {confirmDeleteId && (
