@@ -457,17 +457,27 @@ const handleAvatarUpload = async (e) => {
   </div>
 )}
         {isEditing ? (
-          <div className="flex gap-1">
-            <input
-              value={editText}
-              onChange={(e) => setEditText(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && saveEdit()}
-              className="text-black text-sm p-1 rounded flex-1"
-              autoFocus
-            />
-            <button onClick={saveEdit} className="text-xs">✅</button>
-            <button onClick={() => setEditingId(null)} className="text-xs">✕</button>
-          </div>
+<div className="flex gap-1">
+  <input
+    value={editText}
+    onChange={(e) => setEditText(e.target.value)}
+    onKeyDown={(e) => e.key === 'Enter' && saveEdit()}
+    className="text-black text-sm p-1 rounded flex-1 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400"
+    autoFocus
+  />
+  <button
+    onClick={saveEdit}
+    className="text-xs px-1 hover:scale-105 transition"
+  >
+    ✅
+  </button>
+  <button
+    onClick={() => setEditingId(null)}
+    className="text-xs px-1 hover:scale-105 transition"
+  >
+    ✕
+  </button>
+</div>
         ) : (
           <>
             {msg.content && <div className="break-words">{msg.content}</div>}
