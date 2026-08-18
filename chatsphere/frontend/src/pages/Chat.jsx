@@ -321,20 +321,21 @@ const handleAvatarUpload = async (e) => {
   </div>
   
 
-  <div className="p-3 flex gap-2">
-    <button
-      onClick={() => { setShowNewChat(true); fetchUsers(); }}
-      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 rounded-lg transition"
-    >
-      + Chat
-    </button>
-    <button
-      onClick={() => { setShowGroupModal(true); fetchUsers(); }}
-      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-lg transition"
-    >
-      + Group
-    </button>
-  </div>
+<div className="p-3 flex gap-2">
+  <button
+    onClick={() => { setShowNewChat(true); fetchUsers(); }}
+    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 rounded-lg transition shadow-sm"
+  >
+    + Chat
+  </button>
+
+  <button
+    onClick={() => { setShowGroupModal(true); fetchUsers(); }}
+    className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded-lg transition shadow-sm"
+  >
+    + Group
+  </button>
+</div>
 
   <div className="flex-1 overflow-y-auto px-2">
     {chats.map((chat) => {
