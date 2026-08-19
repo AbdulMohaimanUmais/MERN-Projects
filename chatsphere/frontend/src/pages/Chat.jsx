@@ -397,15 +397,22 @@ const handleAvatarUpload = async (e) => {
   <button onClick={() => setShowSearch(!showSearch)} className="text-sm text-blue-600 hover:text-blue-800">🔍</button>
 </div>
 {showSearch && (
-  <div className="p-2 bg-gray-50 border-b flex gap-2">
+  <div className="p-2.5 bg-gray-50 border-b flex gap-2 items-center">
     <input
+      type="text"
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
-      onKeyDown={(e) => e.key === 'Enter' && searchMessages()}
-      placeholder="Search messages"
-      className="flex-1 border p-1 rounded text-sm"
+      onKeyDown={(e) => e.key === "Enter" && searchMessages()}
+      placeholder="Search messages..."
+      className="flex-1 border border-gray-300 px-3 py-2 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
     />
-    <button onClick={searchMessages} className="text-sm bg-blue-600 text-white px-3 rounded">Go</button>
+
+    <button
+      onClick={searchMessages}
+      className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+    >
+      Search
+    </button>
   </div>
 )}
 {showSearch && searchResults.length > 0 && (
