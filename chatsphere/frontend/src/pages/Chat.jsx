@@ -571,25 +571,45 @@ const handleAvatarUpload = async (e) => {
         )}
       </div>
 
-      {showNewChat && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-4 w-80 max-h-96 overflow-y-auto">
-            <div className="flex justify-between mb-4">
-              <h3 className="font-bold">Select User</h3>
-              <button onClick={() => setShowNewChat(false)}>✕</button>
+{showNewChat && (
+  <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm max-h-[80vh] overflow-hidden">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b">
+        <h3 className="font-semibold text-lg text-gray-800">
+          Select User
+        </h3>
+
+        <button
+          onClick={() => setShowNewChat(false)}
+          className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Users */}
+      <div className="p-3 overflow-y-auto max-h-[60vh]">
+        {allUsers.map((u) => (
+          <div
+            key={u._id}
+            onClick={() => startChat(u._id)}
+            className="flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer hover:bg-blue-50 transition-colors"
+          >
+            <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">
+              {u.username.charAt(0).toUpperCase()}
             </div>
-            {allUsers.map((u) => (
-              <div
-                key={u._id}
-                onClick={() => startChat(u._id)}
-                className="p-2 hover:bg-gray-100 rounded cursor-pointer"
-              >
-                {u.username}
-              </div>
-            ))}
+
+            <span className="text-sm font-medium text-gray-700">
+              {u.username}
+            </span>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
       {showGroupModal && (
 <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
