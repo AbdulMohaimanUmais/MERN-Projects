@@ -686,23 +686,63 @@ const handleAvatarUpload = async (e) => {
 
 
 {showProfile && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg p-5 w-72 text-center">
-      <div className="w-20 h-20 rounded-full bg-blue-600 mx-auto mb-3 flex items-center justify-center font-bold text-2xl text-white overflow-hidden">
-        {user.avatar ? (
-          <img src={user.avatar} alt="avatar" className="w-full h-full object-cover" />
-        ) : (
-          user.username[0].toUpperCase()
-        )}
+  <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="bg-white w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden">
+
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b">
+        <h3 className="text-lg font-semibold text-gray-800">
+          Profile
+        </h3>
+
+        <button
+          onClick={() => setShowProfile(false)}
+          className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition"
+        >
+          ✕
+        </button>
       </div>
-      <p className="font-semibold mb-3">{user.username}</p>
-      <input type="file" ref={avatarInputRef} onChange={handleAvatarUpload} accept="image/*" className="hidden" />
-      <button onClick={() => avatarInputRef.current.click()} className="bg-blue-600 text-white text-sm px-4 py-2 rounded mb-2">
-        Change Avatar
-      </button>
-      <button onClick={() => setShowProfile(false)} className="block w-full text-sm text-gray-500 mt-2">
-        Close
-      </button>
+
+      {/* Profile Content */}
+      <div className="p-6 text-center">
+        <div className="w-24 h-24 rounded-full bg-blue-600 mx-auto mb-4 flex items-center justify-center font-bold text-3xl text-white overflow-hidden shadow-md">
+          {user.avatar ? (
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            user.username[0].toUpperCase()
+          )}
+        </div>
+
+        <p className="text-lg font-semibold text-gray-800 mb-5">
+          {user.username}
+        </p>
+
+        <input
+          type="file"
+          ref={avatarInputRef}
+          onChange={handleAvatarUpload}
+          accept="image/*"
+          className="hidden"
+        />
+
+        <button
+          onClick={() => avatarInputRef.current.click()}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors"
+        >
+          Change Avatar
+        </button>
+
+        <button
+          onClick={() => setShowProfile(false)}
+          className="w-full mt-2 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+        >
+          Close
+        </button>
+      </div>
     </div>
   </div>
 )}
