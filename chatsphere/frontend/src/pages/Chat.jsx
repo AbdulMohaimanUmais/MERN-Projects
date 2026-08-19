@@ -416,10 +416,18 @@ const handleAvatarUpload = async (e) => {
   </div>
 )}
 {showSearch && searchResults.length > 0 && (
-  <div className="p-2 bg-yellow-50 border-b max-h-40 overflow-y-auto">
+  <div className="bg-yellow-50 border-b max-h-48 overflow-y-auto">
     {searchResults.map((m) => (
-      <div key={m._id} className="text-sm p-1 border-b">
-        <span className="font-semibold">{m.sender.username}:</span> {m.content}
+      <div
+        key={m._id}
+        className="px-3 py-2 border-b border-yellow-100 last:border-b-0 hover:bg-yellow-100/60 transition-colors cursor-pointer"
+      >
+        <div className="text-sm">
+          <span className="font-semibold text-gray-800">
+            {m.sender.username}:
+          </span>{" "}
+          <span className="text-gray-600">{m.content}</span>
+        </div>
       </div>
     ))}
   </div>
